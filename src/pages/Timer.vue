@@ -1,5 +1,7 @@
 <script setup>
-import { ref, computed, onUnmounted } from "vue";
+import { ref, computed, onUnmounted, onMounted } from "vue";
+
+console.log("[Timer.vue] Script setup executing");
 
 const totalSeconds = ref(0);
 const isRunning = ref(false);
@@ -38,7 +40,13 @@ function setPreset(mins) {
   }
 }
 
+onMounted(() => {
+  console.log("[Timer.vue] Component mounted successfully!");
+  console.log("[Timer.vue] Current time display:", displayTime.value);
+});
+
 onUnmounted(() => {
+  console.log("[Timer.vue] Component unmounting");
   if (intervalId) {
     clearInterval(intervalId);
   }
